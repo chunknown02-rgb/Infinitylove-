@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MEERUB.EXE ❤️</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+ background:#050505;
+ color:#fff;
+ font-family:Georgia,serif;
+ min-height:100vh;
+ overflow-x:hidden;
+}
+
+body:before{
+ content:"";
+ position:fixed;
+ inset:0;
+ pointer-events:none;
+ background:radial-gradient(circle at 50% 20%,#4b350f33,transparent 45%);
+}
+
+.screen{
+ min-height:100vh;
+ display:none;
+ align-items:center;
+ justify-content:center;
+ padding:25px;
+ text-align:center;
+ position:relative;
+}
+
+.screen.active{display:flex}
+
+.box{
+ width:min(500px,100%);
+ padding:35px 24px;
+ border:1px solid #b99542;
+ border-radius:24px;
+ background:#0d0d0de8;
+ box-shadow:0 0 50px #c99b3a22;
+}
+
+h1{
+ font-size:clamp(30px,8vw,55px);
+ color:#e7c46a;
+ margin-bottom:15px
+}
+
+h2{
+ color:#e7c46a;
+ margin-bottom:18px
+}
+
+p{
+ line-height:1.7;
+ color:#ddd
+}
+
+.gold{color:#e7c46a}
+
+button{
+ border:1px solid #c9a34d;
+ background:#111;
+ color:#e7c46a;
+ padding:13px 19px;
+ border-radius:30px;
+ margin:7px;
+ cursor:pointer;
+ font-size:15px;
+ transition:.3s
+}
+
+button:hover{
+ background:#c9a34d;
+ color:#000;
+ transform:translateY(-2px)
+}
+
+input{
+ width:100%;
+ padding:14px;
+ border-radius:30px;
+ border:1px solid #c9a34d;
+ background:#050505;
+ color:#fff;
+ text-align:center;
+ margin:12px 0;
+ outline:none
+}
+
+.loader{
+ height:8px;
+ background:#222;
+ border-radius:20px;
+ overflow:hidden;
+ margin:25px 0
+}
+
+.loadbar{
+ height:100%;
+ width:0;
+ background:#e7c46a;
+ transition:2.5s
+}
+
+.photo{
+ width:190px;
+ height:190px;
+ border-radius:50%;
+ object-fit:cover;
+ border:3px solid #e7c46a;
+ box-shadow:0 0 35px #e7c46a55;
+ margin:15px
+}
+
+.big{
+ font-size:25px;
+ margin:15px 0
+}
+
+.card{
+ margin:12px 0;
+ padding:18px;
+ border:1px solid #4d4028;
+ border-radius:16px;
+ background:#111
+}
+
+.choice{
+ width:90%;
+ max-width:350px
+}
+
+.hidden{
+ display:none!important
+}
+
+.heart{
+ position:fixed;
+ bottom:-30px;
+ font-size:20px;
+ animation:float 6s linear forwards;
+ pointer-events:none;
+ z-index:20
+}
+
+@keyframes float{
+ to{
+  transform:translateY(-110vh) rotate(360deg);
+  opacity:0
+ }
+}
+
+.fade{
+ animation:fade .8s ease
+}
+
+@keyframes fade{
+ from{
+  opacity:0;
+  transform:translateY(15px)
+ }
+ to{
+  opacity:1;
+  transform:none
+ }
+}
+
+.typing{
+ min-height:120px;
+ color:#eee;
+ font-size:18px;
+ line-height:1.8
+}
+
+.score{
+ font-size:40px;
+ color:#e7c46a;
+ margin:12px
+}
+
+.boxes{
+ display:flex;
+ justify-content:center;
+ gap:8px;
+ flex-wrap:wrap
+}
+
+.gift{
+ width:100px;
+ height:100px;
+ font-size:35px;
+ border-radius:18px;
+ display:flex;
+ align-items:center;
+ justify-content:center
+}
+
+#finalLetter{
+ text-align:left;
+ line-height:2;
+ color:#eee;
+ white-space:pre-line
+}
+
+
+/* CINEMATIC GALLERY */
+
+.gallery{
+ position:relative;
+ width:100%;
+ max-width:420px;
+ margin:20px auto;
+}
+
+.gallery-frame{
+ position:relative;
+ width:100%;
+ height:420px;
+ border-radius:22px;
+ overflow:hidden;
+ border:1px solid #d1ad59;
+ background:#050505;
+ box-shadow:
+ 0 0 25px #e7c46a33,
+ 0 0 70px #e7c46a11;
+}
+
+.gallery-frame img{
+ width:100%;
+ height:100%;
+ object-fit:cover;
+ display:block;
+ transition:opacity .45s ease,transform .45s ease;
+}
+
+.gallery-frame.change img{
+ opacity:0;
+ transform:scale(1.05)
+}
+
+.gallery-controls{
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ margin-top:12px;
+}
+
+.gallery-controls button{
+ width:48px;
+ height:48px;
+ padding:0;
+ font-size:20px;
+}
+
+.counter{
+ color:#e7c46a;
+ font-size:14px;
+ margin:0 15px;
+}
+
+.dots{
+ margin-top:8px;
+}
+
+.dot{
+ display:inline-block;
+ width:7px;
+ height:7px;
+ border-radius:50%;
+ background:#555;
+ margin:4px;
+ transition:.3s;
+}
+
+.dot.active{
+ background:#e7c46a;
+ transform:scale(1.5);
+}
+
+.caption{
+ margin-top:14px;
+ color:#ddd;
+ font-style:italic;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<section class="screen active" id="login">
+ <div class="box fade">
+  <div class="big">💻</div>
+  <h1>MEERUB.EXE</h1>
+  <p>Initializing a very special system...</p>
+
+  <div class="loader">
+   <div class="loadbar" id="bar"></div>
+  </div>
+
+  <p class="gold">Restricted access ❤️</p>
+
+  <input id="pass" placeholder="Enter secret password">
+
+  <button onclick="login()">UNLOCK ❤️</button>
+
+  <p id="wrong" class="gold"></p>
+ </div>
+</section>
+
+
+<!-- HOME -->
+<section class="screen" id="home">
+ <div class="box fade">
+
+  <img src="meerub.jpg"
+       class="photo"
+       onerror="this.style.display='none'">
+
+  <h1>Meerub ❤️</h1>
+
+  <p>
+   System successfully connected to<br>
+   <span class="gold">Zain's heart.</span>
+  </p>
+
+  <br>
+
+  <button onclick="show('scanner')">
+   💗 Love Scanner
+  </button>
+
+  <button onclick="show('paths')">
+   🎮 Choose Your Path
+  </button>
+
+  <button onclick="show('puzzle')">
+   🧩 Puzzle
+  </button>
+
+  <button onclick="show('gifts')">
+   🎁 Mystery Boxes
+  </button>
+
+  <button onclick="show('memories')">
+   📸 Memories
+  </button>
+
+  <button onclick="show('gallery')">
+   🎞️ Cinematic Gallery
+  </button>
+
+  <button onclick="show('princess')">
+   👑 Princess Mode
+  </button>
+
+  <button onclick="show('secret')">
+   💌 Secret File
+  </button>
+
+  <button onclick="troll()">
+   🚫 Do NOT Click
+  </button>
+
+  <br><br>
+
+  <button onclick="playMusic()">
+   ▶ Our Moment 🎵
+  </button>
+
+  <audio id="song" src="song.mp3"></audio>
+
+ </div>
+</section>
+
+
+<!-- SCANNER -->
+<section class="screen" id="scanner">
+ <div class="box fade">
+
+  <h2>💗 Love Compatibility Scanner</h2>
+
+  <p id="scanText">
+   Scanning Meerub...
+  </p>
+
+  <div class="loader">
+   <div class="loadbar" id="scanbar"></div>
+  </div>
+
+  <div id="scores" class="hidden">
+
+   <div class="card">
+    Eyes <b class="gold">100%</b>
+   </div>
+
+   <div class="card">
+    Smile <b class="gold">100%</b>
+   </div>
+
+   <div class="card">
+    Attitude <b class="gold">999%</b> 😂
+   </div>
+
+   <div class="card">
+    Love with Zain <b class="gold">∞%</b>
+   </div>
+
+   <button onclick="show('home')">
+    ← Back
+   </button>
+
+  </div>
+ </div>
+</section>
+
+
+<!-- PATHS -->
+<section class="screen" id="paths">
+ <div class="box fade">
+
+  <h2>🎮 Choose Your Path</h2>
+
+  <button class="choice" onclick="path('feel')">
+   ❤️ Know what Zain feels
+  </button>
+
+  <button class="choice" onclick="path('secret')">
+   🥺 Secret Message
+  </button>
+
+  <button class="choice" onclick="path('roast')">
+   😂 Roast Zain
+  </button>
+
+  <button class="choice" onclick="path('future')">
+   💍 Our Future
+  </button>
+
+  <div id="pathResult" class="card hidden"></div>
+
+  <button onclick="show('home')">
+   ← Back
+  </button>
+
+ </div>
+</section>
+
+
+<!-- PUZZLE -->
+<section class="screen" id="puzzle">
+ <div class="box fade">
+
+  <h2>🧩 One Easy Puzzle</h2>
+
+  <p>Arrange these letters in your mind:</p>
+
+  <div class="big gold">
+   E E R M U B
+  </div>
+
+  <input id="answer" placeholder="Who is this?">
+
+  <button onclick="checkPuzzle()">
+   SUBMIT
+  </button>
+
+  <p id="puzzleResult" class="gold"></p>
+
+  <button onclick="show('home')">
+   ← Back
+  </button>
+
+ </div>
+</section>
+
+
+<!-- GIFTS -->
+<section class="screen" id="gifts">
+ <div class="box fade">
+
+  <h2>🎁 Mystery Boxes</h2>
+
+  <p>Pick one. No cheating 👀</p>
+
+  <div class="boxes">
+
+   <button class="gift" onclick="gift(1)">
+    🎁
+   </button>
+
+   <button class="gift" onclick="gift(2)">
+    🎁
+   </button>
+
+   <button class="gift" onclick="gift(3)">
+    🎁
+   </button>
+
+  </div>
+
+  <div id="giftResult" class="card hidden"></div>
+
+  <button onclick="show('home')">
+   ← Back
+  </button>
+
+ </div>
+</section>
+
+
+<!-- MEMORIES -->
+<section class="screen" id="memories">
+ <div class="box fade">
+
+  <h2>📸 Our Little Timeline</h2>
+
+  <div class="card">
+   ✨ The Beginning<br>
+   <span class="gold">
+    The moment you became special.
+   </span>
+  </div>
+
+  <div class="card">
+   ❤️ My Favourite Person<br>
+   <span class="gold">
+    Some people just become home.
+   </span>
+  </div>
+
+  <div class="card">
+   🌙 Today<br>
+   <span class="gold">
+    Still choosing you.
+   </span>
+  </div>
+
+  <p>
+   12 June — the day my favourite person was born. ❤️
+  </p>
+
+  <button onclick="show('home')">
+   ← Back
+  </button>
+
+ </div>
+</section>
+
+
+<!-- CINEMATIC GALLERY -->
+<section class="screen" id="gallery">
+ <div class="box fade">
+
+  <h2>🎞️ Meerub — Cinematic Memories</h2>
+
+  <p>
+   Five moments. One favourite person. ❤️
+  </p>
+
+  <div class="gallery">
+
+   <div class="gallery-frame" id="galleryFrame">
+    <img id="galleryImage"
+         src="photo1.jpg"
+         alt="Meerub Memory">
+   </div>
+
+   <div class="gallery-controls">
+
+    <button onclick="previousPhoto()">
+     ❮
+    </button>
+
+    <div class="counter">
+     <span id="photoNumber">1</span> / 5
+    </div>
+
+    <button onclick="nextPhoto()">
+     ❯
+    </button>
+
+   </div>
+
+   <div class="dots" id="dots"></div>
+
+   <p class="caption" id="caption">
+    "The first memory..."
+   </p>
+
+  </div>
+
+  <button onclick="show('home')">
+   ← Back
+  </button>
+
+ </div>
+</section>
+
+
+<!-- PRINCESS -->
+<section class="screen" id="princess">
+ <div class="box fade">
+
+  <div class="big">👑</div>
+
+  <h1>PRINCESS MODE</h1>
+
+  <p class="typing">
+   Princess treatment activated. ✨
+   <br><br>
+   No arguments.
+   <br>
+   No complaints.
+   <br>
+   Only respect, love & unlimited pampering. ❤️
+  </p>
+
+  <button onclick="hearts()">
+   ✨ Activate Magic
+  </button>
+
+  <button onclick="show('home')">
+   ← Back
+  </button>
+
+ </div>
+</section>
+
+
+<!-- SECRET -->
+<section class="screen" id="secret">
+ <div class="box fade">
+
+  <h2>💌 /Zain/heart/meerub.txt</h2>
+
+  <div id="finalLetter">
+   Loading secret file...
+  </div>
+
+  <button onclick="show('home')">
+   ← Back
+  </button>
+
+ </div>
+</section>
+
+
+<script>
+
+function show(id){
+
+ document.querySelectorAll('.screen')
+ .forEach(x=>x.classList.remove('active'));
+
+ document.getElementById(id)
+ .classList.add('active');
+
+ if(id==='scanner') startScan();
+
+ if(id==='secret') typeLetter();
+
+ if(id==='gallery') updateGallery();
+
+}
+
+
+window.onload=()=>{
+
+ setTimeout(
+  ()=>document.getElementById('bar').style.width='100%',
+  300
+ );
+
+};
+
+
+/* LOGIN */
+
+function login(){
+
+ let p=document
+ .getElementById('pass')
+ .value.trim();
+
+ if(p.toLowerCase()==='meerubzain'){
+
+  show('home');
+
+  hearts();
+
+ }else{
+
+  document
+  .getElementById('wrong')
+  .textContent="Nice try madam 😭❤️";
+
+ }
+
+}
+
+
+/* SCANNER */
+
+function startScan(){
+
+ document
+ .getElementById('scanbar')
+ .style.width='100%';
+
+ setTimeout(()=>{
+
+  document
+  .getElementById('scanText')
+  .textContent='RESULT FOUND ❤️';
+
+  document
+  .getElementById('scores')
+  .classList.remove('hidden');
+
+ },2200);
+
+}
+
+
+/* PATHS */
+
+function path(type){
+
+ let text={
+
+  feel:
+  "Zain's system report: Meerub is not just someone he loves... she's someone he feels lucky to have. ❤️",
+
+  secret:
+  "Secret.exe says: Even on the busiest day, one thought somehow finds its way back to you. 🌙",
+
+  roast:
+  "WARNING: Zain detected. Main problem: too much confidence, too much bakchodi, and one very special girl. 😂",
+
+  future:
+  "Future.exe: More memories, more laughter, more fights over silly things, and still choosing each other. 💍❤️"
+
+ }[type];
+
+ let r=document.getElementById('pathResult');
+
+ r.textContent=text;
+
+ r.classList.remove('hidden');
+
+}
+
+
+/* PUZZLE */
+
+function checkPuzzle(){
+
+ let a=document
+ .getElementById('answer')
+ .value.trim()
+ .toLowerCase();
+
+ document
+ .getElementById('puzzleResult')
+ .textContent=
+
+ a==='meerub'
+ ?
+ "Correct! ❤️ You unlocked 1 virtual kiss. 😘"
+ :
+ "Wrong answer 😭 Try again.";
+
+}
+
+
+/* GIFTS */
+
+function gift(n){
+
+ let arr=[
+
+  "🌹 A rose for the girl who makes ordinary days feel special.",
+
+  "🥺 Secret: Zain has officially lost the ability to stay normal around Meerub.",
+
+  "💍 Future unlocked: One day we'll look back at this and smile."
+
+ ];
+
+ let r=document
+ .getElementById('giftResult');
+
+ r.textContent=arr[n-1];
+
+ r.classList.remove('hidden');
+
+}
+
+
+/* MUSIC */
+
+function playMusic(){
+
+ let s=document.getElementById('song');
+
+ s.paused ? s.play() : s.pause();
+
+}
+
+
+/* HEARTS */
+
+function hearts(){
+
+ for(let i=0;i<25;i++){
+
+  let h=document.createElement('div');
+
+  h.className='heart';
+
+  h.textContent=
+  ['❤️','💛','✨','💖']
+  [Math.floor(Math.random()*4)];
+
+  h.style.left=
+  Math.random()*100+'vw';
+
+  h.style.animationDelay=
+  Math.random()*2+'s';
+
+  document.body.appendChild(h);
+
+  setTimeout(
+   ()=>h.remove(),
+   7000
+  );
+
+ }
+
+}
+
+
+/* TROLL */
+
+function troll(){
+
+ alert(
+ "I TOLD YOU NOT TO CLICK 😭😂\n"+
+ "Fine: Meerub gets 1 kiss. Zain pays the fine. ❤️"
+ );
+
+}
+
+
+/* SECRET LETTER */
+
+let letterStarted=false;
+
+function typeLetter(){
+
+ if(letterStarted)return;
+
+ letterStarted=true;
+
+ let text=`Dear Meerub ❤️
+
+If this little website made you smile even once,
+then all this coding was worth it.
+
+You are not just a name inside this program.
+You're the reason I wanted to build it.
+
+And if life ever asks me to choose my favourite person again...
+
+I already know the answer.
+
+— Zain ❤️`;
+
+ let i=0;
+
+ let el=document
+ .getElementById('finalLetter');
+
+ el.textContent='';
+
+ let t=setInterval(()=>{
+
+  el.textContent+=text[i++];
+
+  if(i>=text.length)
+   clearInterval(t);
+
+ },25);
+
+}
+
+
+/* CINEMATIC GALLERY */
+
+const photos=[
+
+ "photo1.jpg",
+ "photo2.jpg",
+ "photo3.jpg",
+ "photo4.jpg",
+ "photo5.jpg"
+
+];
+
+const captions=[
+
+ '"The first memory..." ❤️',
+
+ '"A moment worth keeping forever." ✨',
+
+ '"Some pictures hold entire feelings." 🌙',
+
+ '"My favourite view has always been you." 👑',
+
+ '"Five photos. One favourite person. ❤️"'
+
+];
+
+let galleryIndex=0;
+
+
+function updateGallery(){
+
+ const img=document
+ .getElementById('galleryImage');
+
+ const frame=document
+ .getElementById('galleryFrame');
+
+ const number=document
+ .getElementById('photoNumber');
+
+ const caption=document
+ .getElementById('caption');
+
+ frame.classList.add('change');
+
+ setTimeout(()=>{
+
+  img.src=photos[galleryIndex];
+
+  number.textContent=galleryIndex+1;
+
+  caption.textContent=
+  captions[galleryIndex];
+
+  frame.classList.remove('change');
+
+ },250);
+
+ updateDots();
+
+}
+
+
+function nextPhoto(){
+
+ galleryIndex++;
+
+ if(galleryIndex>=photos.length)
+  galleryIndex=0;
+
+ updateGallery();
+
+}
+
+
+function previousPhoto(){
+
+ galleryIndex--;
+
+ if(galleryIndex<0)
+  galleryIndex=photos.length-1;
+
+ updateGallery();
+
+}
+
+
+function updateDots(){
+
+ const dots=document
+ .getElementById('dots');
+
+ dots.innerHTML='';
+
+ photos.forEach((_,i)=>{
+
+  let dot=document
+  .createElement('span');
+
+  dot.className=
+  'dot'+
+  (i===galleryIndex?' active':'');
+
+  dot.onclick=()=>{
+
+   galleryIndex=i;
+
+   updateGallery();
+
+  };
+
+  dots.appendChild(dot);
+
+ });
+
+}
+
+
+/* RANDOM HEART EFFECT */
+
+document.addEventListener('click',e=>{
+
+ if(
+  e.target.tagName==='BUTTON' &&
+  Math.random()<.15
+ )
+  hearts();
+
+});
+
+</script>
+
+</body>
+</html>
